@@ -1,7 +1,7 @@
+import os
 import asyncio
 import datetime
 import logging
-import os
 import time
 import traceback
 
@@ -9,6 +9,9 @@ import edge_tts
 import gradio as gr
 import librosa
 import torch
+import torch.nn as nn
+import torchaudio
+
 from fairseq import checkpoint_utils
 
 from config import Config
@@ -32,6 +35,7 @@ limitation = os.getenv("SYSTEM") == "spaces"
 config = Config()
 
 edge_output_filename = "edge_output.mp3"
+edge_output_wav_filename = "edge_output.wav"
 tts_voice_list = asyncio.get_event_loop().run_until_complete(edge_tts.list_voices())
 tts_voices = [f"{v['ShortName']}-{v['Gender']}" for v in tts_voice_list]
 
@@ -40,7 +44,7 @@ models = [
     d for d in os.listdir(model_root) if os.path.isdir(os.path.join(model_root, d))
 ]
 if len(models) == 0:
-    raise ValueError("No model found in `weights` folder")
+    raise ValueError("No models found in `weights` folder")
 models.sort()
 
 
@@ -54,8 +58,9 @@ def model_data(model_name):
     if len(pth_files) == 0:
         raise ValueError(f"No pth file found in {model_root}/{model_name}")
     pth_path = pth_files[0]
-    print(f"Loading {pth_path}")
-    cpt = torch.load(pth_path, map_location="cpu")
+    
+    print(f"Loading {pth_path} as a PyTorch object")
+    cpt = torch.load(pth_path, map_location="cuda:0")
     tgt_sr = cpt["config"][-1]
     cpt["config"][-3] = cpt["weight"]["emb_g.weight"].shape[0]  # n_spk
     if_f0 = cpt.get("f0", 1)
@@ -95,6 +100,7 @@ def model_data(model_name):
         index_file = index_files[0]
         print(f"Index file found: {index_file}")
 
+    print(f"model_name:{model_name} tgt_sr:{tgt_sr}, vc:{vc}, :{version}, index_file:{index_file}, if_f0:{if_f0}")
     return tgt_sr, net_g, vc, version, index_file, if_f0
 
 
@@ -121,7 +127,6 @@ print("Loading rmvpe model...")
 rmvpe_model = RMVPE("rmvpe.pt", config.is_half, config.device)
 print("rmvpe model loaded.")
 
-
 def tts(
     model_name,
     speed,
@@ -137,11 +142,10 @@ def tts(
 ):
     print("------------------")
     print(datetime.datetime.now())
-    print("tts_text:")
-    print(tts_text)
+    print(f"model_name: {model_name}")
+    print(f"tts_text: {tts_text}")
     print(f"tts_voice: {tts_voice}")
-    print(f"Model name: {model_name}")
-    print(f"F0: {f0_method}, Key: {f0_up_key}, Index: {index_rate}, Protect: {protect}")
+    print(f"speed: {speed} F0: {f0_method}, Key: {f0_up_key}, Index: {index_rate}, Protect: {protect}")
     try:
         if limitation and len(tts_text) > 280:
             print("Error: Text too long")
@@ -224,7 +228,6 @@ def tts(
         print(info)
         return info, None, None
 
-
 initial_md = """
 # RVC text-to-speech webui
 
@@ -271,7 +274,7 @@ with app:
                 label="Edge-tts speaker (format: language-Country-Name-Gender)",
                 choices=tts_voices,
                 allow_custom_value=False,
-                value="ja-JP-NanamiNeural-Female",
+                value="en-US-ChristopherNeural-Male",
             )
             speed = gr.Slider(
                 minimum=-100,
@@ -281,13 +284,13 @@ with app:
                 step=10,
                 interactive=True,
             )
-            tts_text = gr.Textbox(label="Input Text", value="これは日本語テキストから音声への変換デモです。")
+            tts_text = gr.Textbox(label="Input Text", value="This is an English text to speech conversation demo.")
         with gr.Column():
             but0 = gr.Button("Convert", variant="primary")
             info_text = gr.Textbox(label="Output info")
         with gr.Column():
             edge_tts_output = gr.Audio(label="Edge Voice", type="filepath")
-            tts_output = gr.Audio(label="Result")
+            tts_output = gr.Audio(label="Result", type="filepath")
         but0.click(
             tts,
             [
@@ -301,65 +304,60 @@ with app:
                 protect0,
             ],
             [info_text, edge_tts_output, tts_output],
+            api_name="generate-tts"
         )
+
     with gr.Row():
         examples = gr.Examples(
             examples_per_page=100,
             examples=[
+                ["This is an English text to speech conversation demo.", "en-AU-NatashaNeural-Female",],
+                ["This is an English text to speech conversation demo.", "en-AU-WilliamNeural-Male",],
+                ["This is an English text to speech conversation demo.", "en-CA-ClaraNeural-Female",],
+                ["This is an English text to speech conversation demo.", "en-CA-LiamNeural-Male",],
+                ["This is an English text to speech conversation demo.", "en-HK-SamNeural-Male",],
+                ["This is an English text to speech conversation demo.", "en-HK-YanNeural-Female",],
+                ["This is an English text to speech conversation demo.", "en-IN-NeerjaExpressiveNeural-Female",],
+                ["This is an English text to speech conversation demo.", "en-IN-PrabhatNeural-Male",],
+                ["This is an English text to speech conversation demo.", "en-IE-ConnorNeural-Male",],
+                ["This is an English text to speech conversation demo.", "en-IE-EmilyNeural-Female",],
+                ["This is an English text to speech conversation demo.", "en-KE-AsiliaNeural-Female",],
+                ["This is an English text to speech conversation demo.", "en-KE-ChilembaNeural-Male",],
+                ["This is an English text to speech conversation demo.", "en-NZ-MitchellNeural-Male",],
+                ["This is an English text to speech conversation demo.", "en-NZ-MollyNeural-Female",],
+                ["This is an English text to speech conversation demo.", "en-NG-AbeoNeural-Male",],
+                ["This is an English text to speech conversation demo.", "en-NG-EzinneNeural-Female",],
+                ["This is an English text to speech conversation demo.", "en-PH-JamesNeural-Male",],
+                ["This is an English text to speech conversation demo.", "en-PH-RosaNeural-Female",],
+                ["This is an English text to speech conversation demo.", "en-SG-LunaNeural-Female",],
+                ["This is an English text to speech conversation demo.", "en-SG-WayneNeural-Male",],
+                ["This is an English text to speech conversation demo.", "en-ZA-LeahNeural-Female",],
+                ["This is an English text to speech conversation demo.", "en-ZA-LukeNeural-Male",],
+                ["This is an English text to speech conversation demo.", "en-TZ-ElimuNeural-Male",],
+                ["This is an English text to speech conversation demo.", "en-TZ-ImaniNeural-Female",],
+                ["This is an English text to speech conversation demo.", "en-GB-LibbyNeural-Female",],
+                ["This is an English text to speech conversation demo.", "en-GB-MaisieNeural-Female",],
+                ["This is an English text to speech conversation demo.", "en-GB-RyanNeural-Male",],
+                ["This is an English text to speech conversation demo.", "en-GB-SoniaNeural-Female",],
+                ["This is an English text to speech conversation demo.", "en-GB-ThomasNeural-Male",],
+                ["This is an English text to speech conversation demo.", "en-US-AvaNeural-Female",],
+                ["This is an English text to speech conversation demo.", "en-US-AndrewNeural-Male",],
+                ["This is an English text to speech conversation demo.", "en-US-EmmaNeural-Female",],
+                ["This is an English text to speech conversation demo.", "en-US-BrianNeural-Male",],
+                ["This is an English text to speech conversation demo.", "en-US-AnaNeural-Female",],
+                ["This is an English text to speech conversation demo.", "en-US-AriaNeural-Female",],
+                ["This is an English text to speech conversation demo.", "en-US-ChristopherNeural-Male",],
+                ["This is an English text to speech conversation demo.", "en-US-EricNeural-Male",],
+                ["This is an English text to speech conversation demo.", "en-US-GuyNeural-Male",],
+                ["This is an English text to speech conversation demo.", "en-US-JennyNeural-Female",],
+                ["This is an English text to speech conversation demo.", "en-US-MichelleNeural-Female",],
+                ["This is an English text to speech conversation demo.", "en-US-RogerNeural-Male",],
+                ["This is an English text to speech conversation demo.", "en-US-SteffanNeural-Male",],
                 ["これは日本語テキストから音声への変換デモです。", "ja-JP-NanamiNeural-Female"],
-                [
-                    "This is an English text to speech conversation demo.",
-                    "en-US-AriaNeural-Female",
-                ],
-                ["这是一个中文文本到语音的转换演示。", "zh-CN-XiaoxiaoNeural-Female"],
-                ["한국어 텍스트에서 음성으로 변환하는 데모입니다.", "ko-KR-SunHiNeural-Female"],
-                [
-                    "Il s'agit d'une démo de conversion du texte français à la parole.",
-                    "fr-FR-DeniseNeural-Female",
-                ],
-                [
-                    "Dies ist eine Demo zur Umwandlung von Deutsch in Sprache.",
-                    "de-DE-AmalaNeural-Female",
-                ],
-                [
-                    "Tämä on suomenkielinen tekstistä puheeksi -esittely.",
-                    "fi-FI-NooraNeural-Female",
-                ],
-                [
-                    "Это демонстрационный пример преобразования русского текста в речь.",
-                    "ru-RU-SvetlanaNeural-Female",
-                ],
-                [
-                    "Αυτή είναι μια επίδειξη μετατροπής ελληνικού κειμένου σε ομιλία.",
-                    "el-GR-AthinaNeural-Female",
-                ],
-                [
-                    "Esta es una demostración de conversión de texto a voz en español.",
-                    "es-ES-ElviraNeural-Female",
-                ],
-                [
-                    "Questa è una dimostrazione di sintesi vocale in italiano.",
-                    "it-IT-ElsaNeural-Female",
-                ],
-                [
-                    "Esta é uma demonstração de conversão de texto em fala em português.",
-                    "pt-PT-RaquelNeural-Female",
-                ],
-                [
-                    "Це демонстрація тексту до мовлення українською мовою.",
-                    "uk-UA-PolinaNeural-Female",
-                ],
-                [
-                    "هذا عرض توضيحي عربي لتحويل النص إلى كلام.",
-                    "ar-EG-SalmaNeural-Female",
-                ],
-                [
-                    "இது தமிழ் உரையிலிருந்து பேச்சு மாற்ற டெமோ.",
-                    "ta-IN-PallaviNeural-Female",
-                ],
+                ["これは日本語テキストから音声への変換デモです。", "ja-JP-KeitaNeural-Male"],
             ],
             inputs=[tts_text, tts_voice],
         )
 
+app.launch(server_name="0.0.0.0", inbrowser=True)
 
-app.launch(inbrowser=True)

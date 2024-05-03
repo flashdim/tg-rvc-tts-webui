@@ -1,0 +1,367 @@
+{
+	"voice_settings": [
+		{
+			"voice": "Beavis (Animation)",
+			"settings": {
+				"edge_tts_voice": "en-US-ChristopherNeural-Male",
+				"speed": 40,
+				"pitch": 5,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "Butters Stotch (Animation)",
+			"settings": {
+				"edge_tts_voice": "en-US-RogerNeural-Male",
+				"speed": 20,
+				"pitch": 4,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "Butthead (Animation)",
+			"settings": {
+				"edge_tts_voice": "en-US-SteffanNeural-Male",
+				"speed": -10,
+				"pitch": 0,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "Daria (Animation)",
+			"settings": {
+				"edge_tts_voice": "en-US-AnaNeural-Female",
+				"speed": 0,
+				"pitch": -2,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "Cartman (Animation)",
+			"settings": {
+				"edge_tts_voice": "en-US-RogerNeural-Male",
+				"speed": 20,
+				"pitch": 4,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "Goku (Animation)",
+			"settings": {
+				"edge_tts_voice": "en-US-ChristopherNeural-Male",
+				"speed": 0,
+				"pitch": 0,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "Louise Belcher (Animation)",
+			"settings": {
+				"edge_tts_voice": "en-US-AriaNeural-Female",
+				"speed": 20,
+				"pitch": 0,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "Tina Belcher (Animation)",
+			"settings": {
+				"edge_tts_voice": "en-US-MichelleNeural-Female",
+				"speed": 0,
+				"pitch": -6,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "Vegeta (Animation)",
+			"settings": {
+				"edge_tts_voice": "en-US-ChristopherNeural-Male",
+				"speed": 0,
+				"pitch": 0,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "Britney Spears (Artist)",
+			"settings": {
+				"edge_tts_voice": "en-US-MichelleNeural-Female",
+				"speed": 0,
+				"pitch": -1,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "Eminem (Artist)",
+			"settings": {
+				"edge_tts_voice": "en-US-ChristopherNeural-Male",
+				"speed": 0,
+				"pitch": 0,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "Hatsune Miku (Artist)",
+			"settings": {
+				"edge_tts_voice": "ja-JP-NanamiNeural-Female",
+				"speed": 0,
+				"pitch": 0,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "Kanye West (Artist)",
+			"settings": {
+				"edge_tts_voice": "en-US-ChristopherNeural-Male",
+				"speed": 0,
+				"pitch": 0,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "Lady Gaga (Artist)",
+			"settings": {
+				"edge_tts_voice": "en-US-MichelleNeural-Female",
+				"speed": 0,
+				"pitch": -1,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "Lana Del Rey (Artist)",
+			"settings": {
+				"edge_tts_voice": "en-US-MichelleNeural-Female",
+				"speed": 0,
+				"pitch": 0,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "Post Malone (Artist)",
+			"settings": {
+				"edge_tts_voice": "en-US-ChristopherNeural-Male",
+				"speed": 0,
+				"pitch": 0,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "Arnold Schwarzenegger (Movies)",
+			"settings": {
+				"edge_tts_voice": "en-US-ChristopherNeural-Male",
+				"speed": 10,
+				"pitch": 0,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "Darth Vader (Movies)",
+			"settings": {
+				"edge_tts_voice": "en-US-SteffanNeural-Male",
+				"speed": 0,
+				"pitch": -10,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "Joe Biden (Politics)",
+			"settings": {
+				"edge_tts_voice": "en-US-RogerNeural-Male",
+				"speed": 0,
+				"pitch": 0,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "Donald Trump (Politics)",
+			"settings": {
+				"edge_tts_voice": "en-US-GuyNeural-Male",
+				"speed": 0,
+				"pitch": 0,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "Jessie (TikTok)",
+			"settings": {
+				"edge_tts_voice": "en-US-AriaNeural-Female",
+				"speed": 0,
+				"pitch": -1,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "Matthew (TikTok)",
+			"settings": {
+				"edge_tts_voice": "en-US-ChristopherNeural-Male",
+				"speed": 0,
+				"pitch": -1,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "Alyx Vance (Video Games)",
+			"settings": {
+				"edge_tts_voice": "en-US-AnaNeural-Female",
+				"speed": 0,
+				"pitch": 0,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "G-Man (Video Games)",
+			"settings": {
+				"edge_tts_voice": "en-US-Christophereural-Male",
+				"speed": -20,
+				"pitch": -4,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "GLaDOS (Video Games)",
+			"settings": {
+				"edge_tts_voice": "en-US-AriaNeural-Female",
+				"speed": -10,
+				"pitch": -6,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "Doctor Kleiner (Video Games)",
+			"settings": {
+				"edge_tts_voice": "en-US-GuyNeural-Male",
+				"speed": 10,
+				"pitch": 0,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "Johnny Silverhand (Video Games)",
+			"settings": {
+				"edge_tts_voice": "en-US-ChristopherNeural-Male",
+				"speed": 0,
+				"pitch": 0,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "Kanji Tatsumi (Video Games)",
+			"settings": {
+				"edge_tts_voice": "en-US-RogerNeural-Male",
+				"speed": 0,
+				"pitch": -2,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "Wheatley (Video Games)",
+			"settings": {
+				"edge_tts_voice": "en-GB-ThomasNeural-Male",
+				"speed": 0,
+				"pitch": 0,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "JSchlatt (YouTube)",
+			"settings": {
+				"edge_tts_voice": "en-US-ChristopherNeural-Male",
+				"speed": 0,
+				"pitch": -1,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "moistcritikal (YouTube)",
+			"settings": {
+				"edge_tts_voice": "en-US-ChristopherNeural-Male",
+				"speed": 0,
+				"pitch": -1,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "PewDiePie (YouTube)",
+			"settings": {
+				"edge_tts_voice": "en-US-SteffanNeural-Male",
+				"speed": 0,
+				"pitch": 0,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "SunnyV2 (YouTube)",
+			"settings": {
+				"edge_tts_voice": "en-AU-WilliamNeural-Male",
+				"speed": -10,
+				"pitch": 0,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		}
+	]
+}
