@@ -78,6 +78,17 @@
 			}
 		},
 		{
+			"voice": "Spongebob (Animation)",
+			"settings": {
+				"edge_tts_voice": "en-US-RogerNeural-Male",
+				"speed": 30,
+				"pitch": 2,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
 			"voice": "Tina Belcher (Animation)",
 			"settings": {
 				"edge_tts_voice": "en-US-MichelleNeural-Female",
@@ -199,7 +210,18 @@
 			}
 		},
 		{
-			"voice": "Joe Biden (Politics)",
+			"voice": "Alex Jones (Politics)",
+			"settings": {
+				"edge_tts_voice": "en-US-GuyNeural-Male",
+				"speed": 20,
+				"pitch": -2,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "Barack Obama (Politics)",
 			"settings": {
 				"edge_tts_voice": "en-US-RogerNeural-Male",
 				"speed": 0,
@@ -213,6 +235,17 @@
 			"voice": "Donald Trump (Politics)",
 			"settings": {
 				"edge_tts_voice": "en-US-GuyNeural-Male",
+				"speed": 0,
+				"pitch": 0,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "Joe Biden (Politics)",
+			"settings": {
+				"edge_tts_voice": "en-US-RogerNeural-Male",
 				"speed": 0,
 				"pitch": 0,
 				"f0_method": "rmvpe",
