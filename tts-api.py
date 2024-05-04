@@ -8,7 +8,6 @@ import pysbd
 import pydub
 import subprocess
 from flask import Flask, request, send_file, abort, jsonify
-from gradio_client import Client, file
 
 api = Flask(__name__)
 
@@ -32,8 +31,8 @@ voice_settings_json = {}
 names_json = {}
 use_voice_name_mapping = True
 
-# Define the URL of the Gradio server
-server_url = "http://localhost:7860/"
+# Define the URL of the Flask server
+server_url = "http://localhost:5003/"
 
 # For health checks
 req_count = 1
@@ -78,38 +77,30 @@ def text_to_speech_handler(endpoint, voice, text, filter_complex, pitch, special
 	data_bytes = io.BytesIO()
 	final_audio = pydub.AudioSegment.empty()
 	model = extract_voice_setting(voice, "edge_tts_voice")
+	speed = extract_voice_setting(voice, "speed")
 
 	for sentence in segmenter.segment(text):
-		# Send the segmented audo as a request to the gradio endpoint
-		#response = requests.get(server_url + endpoint, json={ 'text': sentence, 'voice': voice, 'pitch': pitch })
-		client = Client(server_url)
-		client.view_api()
+		# Send the segmented audo as a request to the flask endpoint
+		# TODO asyncio here?
+		response = requests.get(server_url + endpoint, json={
+			'model_name': voice,
+			'speed': speed,
+			'tts_text': sentence,
+			'tts_voice': model,
+			'f0_up_key': pitch,
+			'f0_method': 'rmvpe',
+			'index_rate': 1,
+			'protect': 0.33})
+		#client = Client(server_url)
+		#client.view_api()
 		req_count += 1
 
-		result = client.predict( 
-		voice,
-		extract_voice_setting(voice, "speed"),
-		sentence,
-		model,
-		pitch,
-		'rmvpe',
-		1,
-		0.33,
-		api_name=endpoint
-		)
-
-		# Assuming result is the tuple returned by the API call
-		output_info, edge_voice_audio_file, result_audio_file = result
-
-		#print(f"Output info:{output_info}")
-
-		# if response.status_code != 200:
-		if output_info == "":
+		if response.status_code != 200:
 			abort(500)
 
 		# Piece together audio from segments
 		# Use the edge mp3 for edge-tts voices, and the output wav for others
-		sentence_audio = pydub.AudioSegment.from_file(open(result_audio_file, "rb"), "wav")
+		sentence_audio = pydub.AudioSegment.from_file(io.BytesIO(response.content), "wav")
 		sentence_silence = pydub.AudioSegment.silent(250, 40000)
 		sentence_audio += sentence_silence
 		final_audio += sentence_audio
@@ -144,6 +135,11 @@ def text_to_speech_handler(endpoint, voice, text, filter_complex, pitch, special
 
 	response = send_file(export_audio, as_attachment=True, download_name='identifier.ogg', mimetype="audio/ogg")
 	response.headers['audio-length'] = length
+
+	# Write the stuff for debugging
+	with open("last_output.ogg", "wb") as f:
+		f.write(export_audio.getbuffer())
+
 	return response
 
 #
@@ -189,8 +185,7 @@ def voices_list():
 # Return available pitch
 @api.route("/pitch-available")
 def pitch_available():
-	# Send a GET request to the Gradio server
-    response = requests.get(server_url)
+    response = requests.get(f"{server_url}/pitch-available")
 
     if response.status_code != 200:
         abort(500)
@@ -202,8 +197,8 @@ def tts_health_check():
     global req_count
 
     try:
-        # Send a GET request to the Gradio server
-        response = requests.get(server_url)
+        # Send a GET request to the Flask server
+        response = requests.get(f"{server_url}/health-check")
 
         # Check the status code of the response
         if response.status_code == 200:
