@@ -4,3 +4,4 @@ __pycache__/
 hubert_base.pt
 rmvpe.pt
 edge_output.wav
+last_output.ogg
