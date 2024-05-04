@@ -45,7 +45,7 @@
 			}
 		},
 		{
-			"voice": "Cartman (Animation)",
+			"voice": "Eric Cartman (Animation)",
 			"settings": {
 				"edge_tts_voice": "en-US-RogerNeural-Male",
 				"speed": 20,
@@ -78,11 +78,44 @@
 			}
 		},
 		{
-			"voice": "Spongebob (Animation)",
+			"voice": "Patrick Star (Animation)",
+			"settings": {
+				"edge_tts_voice": "en-US-RogerNeural-Male",
+				"speed": 0,
+				"pitch": 0,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "Spongebob Squarepants (Animation)",
 			"settings": {
 				"edge_tts_voice": "en-US-RogerNeural-Male",
 				"speed": 30,
 				"pitch": 2,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "Squidward Tentacles (Animation)",
+			"settings": {
+				"edge_tts_voice": "en-US-RogerNeural-Male",
+				"speed": 0,
+				"pitch": 0,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "Strong Bad (Animation)",
+			"settings": {
+				"edge_tts_voice": "en-US-RogerNeural-Male",
+				"speed": 30,
+				"pitch": 0,
 				"f0_method": "rmvpe",
 				"index_rate": 1,
 				"protect0": 0.33
@@ -278,7 +311,7 @@
 		{
 			"voice": "Alyx Vance (Video Games)",
 			"settings": {
-				"edge_tts_voice": "en-US-AnaNeural-Female",
+				"edge_tts_voice": "en-US-MelissaNeural-Female",
 				"speed": 0,
 				"pitch": 0,
 				"f0_method": "rmvpe",
@@ -289,7 +322,7 @@
 		{
 			"voice": "G-Man (Video Games)",
 			"settings": {
-				"edge_tts_voice": "en-US-Christophereural-Male",
+				"edge_tts_voice": "en-US-ChristopherNeural-Male",
 				"speed": -20,
 				"pitch": -4,
 				"f0_method": "rmvpe",
@@ -342,6 +375,28 @@
 			}
 		},
 		{
+			"voice": "TF2 Heavy (Video Games)",
+			"settings": {
+				"edge_tts_voice": "ru-RU-DmitryNeural-Male",
+				"speed": 0,
+				"pitch": 0,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "TF2 Soldier (Video Games)",
+			"settings": {
+				"edge_tts_voice": "en-US-RogerNeural-Male",
+				"speed": 0,
+				"pitch": 0,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
 			"voice": "Wheatley (Video Games)",
 			"settings": {
 				"edge_tts_voice": "en-GB-ThomasNeural-Male",
@@ -358,6 +413,17 @@
 				"edge_tts_voice": "en-US-ChristopherNeural-Male",
 				"speed": 0,
 				"pitch": -1,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "Markiplier (YouTube)",
+			"settings": {
+				"edge_tts_voice": "en-US-AndrewMultilingualNeural-Male",
+				"speed": 0,
+				"pitch": -4,
 				"f0_method": "rmvpe",
 				"index_rate": 1,
 				"protect0": 0.33
