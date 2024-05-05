@@ -32,7 +32,7 @@ names_json = {}
 use_voice_name_mapping = True
 
 # Define the URL of the Flask server
-server_url = "http://localhost:5003/"
+server_url = "http://127.0.0.1:5003/"
 
 # For health checks
 req_count = 1
@@ -60,12 +60,6 @@ def extract_voice_setting(voice, setting):
     return setting_value
 
 names_json = extract_names(voice_settings_json)
-test_voice = "Kanji Tatsumi (Video Games)"
-#print("Json check:")
-#print("  voice: " + test_voice)
-#print("  edge_tts_voice: " + str(extract_voice_setting(test_voice, "edge_tts_voice")))
-#print("  speed: " + str(extract_voice_setting(test_voice, "speed")))
-#print("  pitch: " + str(extract_voice_setting(test_voice, "pitch")))
 
 #
 # Filter Pipeline
@@ -81,7 +75,6 @@ def text_to_speech_handler(endpoint, voice, text, filter_complex, pitch, special
 
 	for sentence in segmenter.segment(text):
 		# Send the segmented audo as a request to the flask endpoint
-		# TODO asyncio here?
 		response = requests.get(server_url + endpoint, json={
 			'model_name': voice,
 			'speed': speed,
@@ -94,6 +87,7 @@ def text_to_speech_handler(endpoint, voice, text, filter_complex, pitch, special
 		#client = Client(server_url)
 		#client.view_api()
 		req_count += 1
+		print(f"Request {req_count} sent: {voice}:{sentence}")
 
 		if response.status_code != 200:
 			abort(500)
@@ -216,5 +210,5 @@ if __name__ == "__main__":
 		os.putenv('LD_LIBRARY_PATH', os.getenv('TTS_LD_LIBRARY_PATH'))
 	from waitress import serve
 	print("Starting API!")
-	serve(api, host="0.0.0.0", port=5002, threads=4, backlog=8, connection_limit=24, channel_timeout=10)
+	serve(api, host="0.0.0.0", port=5002, threads=2, backlog=8, connection_limit=24, channel_timeout=10)
 

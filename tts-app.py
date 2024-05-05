@@ -27,8 +27,6 @@ from lib.infer_pack.models import (
 from rmvpe import RMVPE
 from vc_infer_pipeline import VC
 
-gc.enable()
-
 logging.getLogger("fairseq").setLevel(logging.WARNING)
 logging.getLogger("numba").setLevel(logging.WARNING)
 logging.getLogger("markdown_it").setLevel(logging.WARNING)
@@ -40,7 +38,7 @@ limitation = os.getenv("SYSTEM") == "spaces"
 config = Config()
 
 edge_output_filename = "edge_output.mp3"
-edge_output_wav_filename = "edge_output.wav"
+
 tts_voice_list = asyncio.get_event_loop().run_until_complete(edge_tts.list_voices())
 tts_voices = [f"{v['ShortName']}-{v['Gender']}" for v in tts_voice_list]
 
@@ -139,8 +137,8 @@ print("rmvpe model loaded.")
 def tts():
     global request_count
 
-    print(f"Garbage at TTS start: {gc.collect()}")
-    print(f"Garbage stats:\n {gc.get_stats()}")
+    #print(f"Garbage at TTS start: {gc.collect()}")
+    #print(f"Garbage stats:\n {gc.get_stats()}")
 
     model_name  = request.json.get("model_name", "")
     speed = request.json.get("speed", "")
@@ -232,8 +230,8 @@ def tts():
         result = send_file(audio_wav, mimetype="audio/wav")
         request_count += 1
 
-        print(f"Garbage at TTS end: {gc.collect()}")
-        print(f"Garbage stats:\n {gc.get_stats()}")
+        #print(f"Garbage at TTS end: {gc.collect()}")
+        #print(f"Garbage stats:\n {gc.get_stats()}")
 
         return result
     except EOFError:
