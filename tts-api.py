@@ -83,7 +83,7 @@ def text_to_speech_handler(endpoint, voice, text, filter_complex, pitch, special
 			'f0_up_key': pitch,
 			'f0_method': 'rmvpe',
 			'index_rate': 1,
-			'protect': 0.33})
+			'protect': 0.5})
 		#client = Client(server_url)
 		#client.view_api()
 		req_count += 1
