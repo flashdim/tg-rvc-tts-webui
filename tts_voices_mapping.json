@@ -144,11 +144,33 @@
 			}
 		},
 		{
+			"voice": "Dragon Ball Z - Krillin",
+			"settings": {
+				"edge_tts_voice": "en-US-RogerNeural-Male",
+				"speed": 10,
+				"pitch": 0,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
+			"voice": "Dragon Ball Z - Piccolo",
+			"settings": {
+				"edge_tts_voice": "en-US-EricNeural-Male",
+				"speed": 0,
+				"pitch": -2,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.33
+			}
+		},
+		{
 			"voice": "Dragon Ball Z - Son Goku",
 			"settings": {
-				"edge_tts_voice": "en-US-ChristopherNeural-Male",
+				"edge_tts_voice": "en-US-AndrewNeural-Male",
 				"speed": 0,
-				"pitch": 0,
+				"pitch": 4,
 				"f0_method": "rmvpe",
 				"index_rate": 1,
 				"protect0": 0.33
@@ -159,7 +181,7 @@
 			"settings": {
 				"edge_tts_voice": "en-US-ChristopherNeural-Male",
 				"speed": 0,
-				"pitch": 0,
+				"pitch": -1,
 				"f0_method": "rmvpe",
 				"index_rate": 1,
 				"protect0": 0.33
