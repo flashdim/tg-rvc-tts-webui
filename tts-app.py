@@ -230,7 +230,7 @@ def tts():
         result = send_file(audio_wav, mimetype="audio/wav")
         request_count += 1
 
-        #print(f"Garbage at TTS end: {gc.collect()}")
+        print(f"Garbage at TTS end: {gc.collect()}")
         #print(f"Garbage stats:\n {gc.get_stats()}")
 
         return result
