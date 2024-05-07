@@ -188,6 +188,28 @@
 			}
 		},
 		{
+			"voice": "Duckman",
+			"settings": {
+				"edge_tts_voice": "en-US-GuyNeural-Male",
+				"speed": 10,
+				"pitch": 0,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.50
+			}
+		},
+		{
+			"voice": "Duckman - Cornfed",
+			"settings": {
+				"edge_tts_voice": "en-US-ChristopherNeural-Male",
+				"speed": 20,
+				"pitch": 0,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.50
+			}
+		},
+		{
 			"voice": "Duke Nukem",
 			"settings": {
 				"edge_tts_voice": "en-US-EricNeural-Male",
@@ -520,12 +542,23 @@
 		{
 			"voice": "Team Fortress 2 - Heavy Weapons Guy",
 			"settings": {
-				"edge_tts_voice": "ru-RU-DmitryNeural-Male",
+				"edge_tts_voice": "en-US-ChristopherNeural-Male",
 				"speed": 0,
 				"pitch": 0,
 				"f0_method": "rmvpe",
 				"index_rate": 1,
-				"protect0": 0.33
+				"protect0": 0.5
+			}
+		},
+		{
+			"voice": "Team Fortress 2 - Scout",
+			"settings": {
+				"edge_tts_voice": "en-US-SteffanNeural-Male",
+				"speed": 20,
+				"pitch": 0,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.5
 			}
 		},
 		{
