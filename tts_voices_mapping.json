@@ -452,6 +452,17 @@
 			}
 		},
 		{
+			"voice": "Portal - Cave Johnson",
+			"settings": {
+				"edge_tts_voice": "en-US-RogerNeural-Male",
+				"speed": 0,
+				"pitch": -3,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.5
+			}
+		},
+		{
 			"voice": "Portal - GLaDOS",
 			"settings": {
 				"edge_tts_voice": "en-US-AriaNeural-Female",
