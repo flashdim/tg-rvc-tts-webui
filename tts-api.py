@@ -24,7 +24,7 @@ tts_sample_rate = 40000
 segmenter = pysbd.Segmenter(language="en", clean=True)
 radio_starts = ["./on1.wav", "./on2.wav"]
 radio_ends = ["./off1.wav", "./off2.wav", "./off3.wav", "./off4.wav"]
-authorization_token = os.getenv("TTS_AUTHORIZATION_TOKEN", "coolio")
+authorization_token = os.getenv("TTS_AUTHORIZATION_TOKEN", "buttstuph")
 
 # TTS model mapping
 voice_settings_json = {}
@@ -52,10 +52,11 @@ def extract_names(json_data):
 
 # Extract the default setting for a voice
 def extract_voice_setting(voice, setting):
-    setting_value = None
+    setting_value = '0'
     for item in voice_settings_json['voice_settings']:
         if item['voice'] == voice:
             setting_value = item['settings'][setting]
+            print(f"Found {setting} value {setting_value} for {voice}")
             break
     return setting_value
 
@@ -130,8 +131,15 @@ def text_to_speech_handler(endpoint, voice, text, filter_complex, pitch, special
 	response = send_file(export_audio, as_attachment=True, download_name='identifier.ogg', mimetype="audio/ogg")
 	response.headers['audio-length'] = length
 
-	# Write the stuff for debugging
-	with open("last_output.ogg", "wb") as f:
+	# Write the output for debugging/testing
+	filename_voice = voice
+	# Sanitize text for filename
+	filename_text = re.sub(r"[^\w\s]", "", text)
+	# Combine the two and cap length
+	output_filename = f"{filename_voice} - {filename_text}"
+
+	#Save but cap string length
+	with open(f"./output/{output_filename[:48]}.ogg", "wb") as f:
 		f.write(export_audio.getbuffer())
 
 	return response
@@ -141,8 +149,8 @@ def text_to_speech_handler(endpoint, voice, text, filter_complex, pitch, special
 #
 @api.route("/tts")
 def text_to_speech_normal():
-	#if authorization_token != request.headers.get("Authorization", ""):
-	#	abort(401)
+	if authorization_token != request.headers.get("Authorization", ""):
+		abort(401)
 
 	voice = request.args.get("voice", '')
 	text = request.json.get("text", '')

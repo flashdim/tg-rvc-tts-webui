@@ -12,14 +12,14 @@
 			}
 		},
 		{
-			"voice": "Beavis & Butthead - Beavis",
+			"voice": "Beavis and Butthead - Beavis",
 			"settings": {
 				"edge_tts_voice": "en-US-ChristopherNeural-Male",
 				"speed": 40,
 				"pitch": 5,
 				"f0_method": "rmvpe",
 				"index_rate": 1,
-				"protect0": 0.33
+				"protect0": 0.5
 			}
 		},
 		{
@@ -30,13 +30,13 @@
 				"pitch": 0,
 				"f0_method": "rmvpe",
 				"index_rate": 1,
-				"protect0": 0.33
+				"protect0": 0.5
 			}
 		},
 		{
 			"voice": "Beavis and Butthead - Daria",
 			"settings": {
-				"edge_tts_voice": "en-US-AnaNeural-Female",
+				"edge_tts_voice": "en-US-MichelleNeural-Female",
 				"speed": 0,
 				"pitch": -2,
 				"f0_method": "rmvpe",
@@ -485,6 +485,17 @@
 			}
 		},
 		{
+			"voice": "Sir David Attenborough",
+			"settings": {
+				"edge_tts_voice": "en-GB-ThomasNeural-Male",
+				"speed": 0,
+				"pitch": 0,
+				"f0_method": "rmvpe",
+				"index_rate": 1,
+				"protect0": 0.50
+			}
+		},
+		{
 			"voice": "South Park - Butters Stotch",
 			"settings": {
 				"edge_tts_voice": "en-US-RogerNeural-Male",
@@ -639,7 +650,7 @@
 			}
 		},
 		{
-			"voice": "YouTuber - moistcritikal",
+			"voice": "YouTuber - MoistCr1TiKaL",
 			"settings": {
 				"edge_tts_voice": "en-US-ChristopherNeural-Male",
 				"speed": 0,
