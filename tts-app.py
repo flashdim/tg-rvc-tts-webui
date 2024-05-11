@@ -15,6 +15,8 @@ import torch
 import torch.nn as nn
 import torchaudio
 
+os.environ["CUDA_MODULE_LOADING"] = "LAZY"
+
 from fairseq import checkpoint_utils
 
 from config import Config
