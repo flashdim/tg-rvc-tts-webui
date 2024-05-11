@@ -14,6 +14,8 @@ import torchaudio
 
 from fairseq import checkpoint_utils
 
+os.environ["CUDA_MODULE_LOADING"] = "LAZY"
+
 from config import Config
 from lib.infer_pack.models import (
     SynthesizerTrnMs256NSFsid,
