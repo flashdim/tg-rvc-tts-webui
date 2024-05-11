@@ -193,7 +193,7 @@ class VC(object):
             "output_layer": 9 if version == "v1" else 12,
         }
         t0 = ttime()
-        with torch.no_grad():
+        with torch.inference_mode():
             logits = model.extract_features(**inputs)
             feats = model.final_proj(logits[0]) if version == "v1" else logits[0]
         if protect < 0.5 and pitch != None and pitchf != None:
@@ -243,7 +243,7 @@ class VC(object):
             feats = feats * pitchff + feats0 * (1 - pitchff)
             feats = feats.to(feats0.dtype)
         p_len = torch.tensor([p_len], device=self.device).long()
-        with torch.no_grad():
+        with torch.inference_mode():
             if pitch != None and pitchf != None:
                 audio1 = (
                     (net_g.infer(feats, p_len, pitch, pitchf, sid)[0][0, 0])
